@@ -1,0 +1,19 @@
+# Java
+target/
+*.class
+*.jar
+
+# IDE
+.idea/
+*.iml
+*.log
+
+# OS
+.DS_Store
+
+# Node / Frontend (if any)
+node_modules/
+dist/
+
+# Others
+*.env
