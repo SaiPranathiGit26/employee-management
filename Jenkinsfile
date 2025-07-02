@@ -7,29 +7,36 @@ pipeline {
                 git url: 'https://github.com/SaiPranathiGit26/employee-management.git', branch: 'main'
             }
         }
-
+        
         stage('Build with Maven') {
-            steps {
-                sh 'mvn clean install'
-            }
+        steps {
+          dir('backend') {
+            sh 'mvn clean install'
         }
+    }
+}
 
         stage('Run Unit Tests') {
-            steps {
-                sh 'mvn test'
-            }
+    steps {
+        dir('backend') {
+            sh 'mvn test'
         }
+    }
+}
+stage('Build Docker Image') {
+    steps {
+        dir('backend') {
+            sh 'docker build -t employee-backend .'
+        }
+    }
+}
+stage('Run with Docker Compose') {
+    steps {
+        dir('backend') {
+            sh 'docker-compose up -d'
+        }
+    }
+}
 
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t employee-app .'
-            }
-        }
-
-        stage('Run with Docker Compose') {
-            steps {
-                sh 'docker-compose up -d'
-            }
-        }
     }
 }
