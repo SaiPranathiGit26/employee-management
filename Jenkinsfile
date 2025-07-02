@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Pull Code') {
             steps {
-                git 'https://github.com/SaiPranathiGit26/employee-management.git'
+                git url: 'https://github.com/SaiPranathiGit26/employee-management.git', branch: 'main'
             }
         }
 
