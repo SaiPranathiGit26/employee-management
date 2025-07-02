@@ -1,0 +1,38 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: employee-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: employee_db
+      MYSQL_USER: empuser
+      MYSQL_PASSWORD: Emp@1234
+      MYSQL_ROOT_PASSWORD: rootpass
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootpass"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend-net
+
+  backend:
+    build: .
+    container_name: employee-backend-container
+    ports:
+      - "8081:8081"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://employee-mysql:3306/employee_db
+      SPRING_DATASOURCE_USERNAME: empuser
+      SPRING_DATASOURCE_PASSWORD: Emp@1234
+    networks:
+      - backend-net
+
+networks:
+  backend-net:
+
