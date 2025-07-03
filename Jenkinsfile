@@ -37,6 +37,13 @@ stage('Run with Docker Compose') {
         }
     }
 }
+stage('Deploy with Ansible') {
+    steps {
+        dir("${WORKSPACE}/ansible-deploy") {
+            sh 'ansible-playbook -i inventory.ini deploy.yml'
+        }
+    }
+}
 
     }
 }
