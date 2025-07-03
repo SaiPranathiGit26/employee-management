@@ -1,0 +1,16 @@
+---
+- name: Deploy Employee Management App using Docker
+  hosts: localhost
+  connection: local
+
+  tasks:
+    - name: Stop running containers (if any)
+      ansible.builtin.shell: docker-compose down
+      args:
+        chdir: /home/saipranathi/employee-management/backend
+
+    - name: Start containers with docker-compose
+      ansible.builtin.shell: docker-compose up --build -d
+      args:
+        chdir: /home/saipranathi/employee-management/backend
+
