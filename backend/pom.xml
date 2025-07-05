@@ -46,6 +46,17 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+             <groupId>io.micrometer</groupId>
+             <artifactId>micrometer-registry-statsd</artifactId>
+       </dependency>
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-graphite</artifactId> 
+         </dependency>
+
     </dependencies>
 
     <!-- Optional: explicitly force Maven Central repo -->

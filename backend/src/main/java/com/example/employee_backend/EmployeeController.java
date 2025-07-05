@@ -1,21 +1,29 @@
 package com.example.employee_backend;
 
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
 @CrossOrigin(origins = "*")
 public class EmployeeController {
-    private final EmployeeRepository repo;
 
-    public EmployeeController(EmployeeRepository repo) {
+    private final EmployeeRepository repo;
+    private final MeterRegistry meterRegistry;
+
+    public EmployeeController(EmployeeRepository repo, MeterRegistry meterRegistry) {
         this.repo = repo;
+        this.meterRegistry = meterRegistry;
     }
 
     // GET all employees
     @GetMapping
     public List<Employee> getAll() {
+        // ✅ Increment custom metric
+        meterRegistry.counter("custom.employee.api.calls").increment();
+
         return repo.findAll();
     }
 

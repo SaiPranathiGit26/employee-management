@@ -13,6 +13,16 @@ public class Employee {
     private String email;
     private String department;
 
+    // ✅ No-arg constructor (required by JPA)
+    public Employee() {}
+
+    // ✅ All-args constructor for convenience (used in tests)
+    public Employee(String name, String email, String department) {
+        this.name = name;
+        this.email = email;
+        this.department = department;
+    }
+
     // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
