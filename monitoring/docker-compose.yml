@@ -6,11 +6,8 @@ services:
     container_name: graphite
     ports:
       - "8085:80"
-      - "2003-2004:2003-2004"
-      - "2023-2024:2023-2024"
       - "8125:8125/udp"
       - "8126:8126"
-    restart: always
 
   grafana:
     image: grafana/grafana
@@ -19,5 +16,12 @@ services:
       - "3000:3000"
     depends_on:
       - graphite
-    restart: always
 
+  backend:
+    build: .
+    container_name: backend
+    ports:
+      - "8081:8081"
+    depends_on:
+      - graphite
+    restart: always
