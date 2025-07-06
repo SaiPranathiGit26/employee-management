@@ -5,12 +5,11 @@
 
   tasks:
     - name: Stop running containers (if any)
-      ansible.builtin.shell: docker-compose down
+      ansible.builtin.shell: docker compose down
       args:
         chdir: /home/saipranathi/employee-management/backend
 
-    - name: Start containers with docker-compose
-      ansible.builtin.shell: docker-compose up --build -d
+    - name: Start containers with docker compose
+      ansible.builtin.shell: docker compose up --build -d
       args:
         chdir: /home/saipranathi/employee-management/backend
-
