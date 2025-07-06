@@ -33,7 +33,7 @@ stage('Build Docker Image') {
 stage('Run with Docker Compose') {
     steps {
         dir('backend') {
-            sh 'docker-compose up -d'
+            sh 'docker compose up -d'
         }
     }
 }
